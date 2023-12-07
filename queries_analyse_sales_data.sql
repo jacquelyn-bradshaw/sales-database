@@ -10,26 +10,26 @@ AND SalesPerson IN ("Bill", "Frank")
 AND SalesAmount > 50;
 
 -- Find out how many sales took place each week (in no particular order)
-SELECT Week, count(Week) AS "Number of Sales"
+SELECT Week, COUNT(Week) AS "Number of Sales"
 FROM sales1
 GROUP BY Week;
 
 /* Find out how many sales took place each week
 AND present data by week in descending order */
-SELECT Week, count(Week) AS "Number of Sales"
+SELECT Week, COUNT(Week) AS "Number of Sales"
 FROM sales1
 GROUP BY Week
 ORDER BY Week DESC;
 
 /* Find out how many sales took place each week
 AND present data by week in ascending order */
-SELECT Week, count(Week) AS "Number of Sales"
+SELECT Week, COUNT(Week) AS "Number of Sales"
 FROM sales1
 GROUP BY Week
 ORDER BY Week ASC;
 
 -- Find out how many sales were recorded each week on different days of the week
-SELECT Week, Day, count(Day) AS "Number of Sales"
+SELECT Week, Day, COUNT(Day) AS "Number of Sales"
 FROM sales1
 GROUP BY Week, Day
 ORDER BY Week;
@@ -50,28 +50,28 @@ FROM sales1
 WHERE SalesPerson = "Annette";
 
 -- Find the total sales amount by each person by day
-SELECT Day, SalesPerson, SUM(SalesAmount) AS "Total Sales Amount"
+SELECT Day, SalesPerson, ROUND(SUM(SalesAmount), 2) AS "Total Sales Amount"
 FROM sales1
 GROUP BY Day, SalesPerson;
 
 -- How much (sum) each person sold for the given period
-SELECT SalesPerson, SUM(SalesAmount) AS "Total Sales Amount"
+SELECT SalesPerson, ROUND(SUM(SalesAmount), 2) AS "Total Sales Amount"
 FROM sales1
 GROUP BY SalesPerson;
 
 /* How much (sum) each person sold for the given period, including the number of
 sales per person, their average, lowest and highest sale amounts */
 SELECT SalesPerson,
-SUM(SalesAmount) AS "Total Sales Amount",
+ROUND(SUM(SalesAmount), 2) AS "Total Sales Amount",
 COUNT(SalesPerson) AS "Number of Sales",
-AVG(SalesAmount) AS "Average Sales Amount",
+ROUND(AVG(SalesAmount), 2) AS "Average Sales Amount",
 MIN(SalesAmount) AS "Lowest Sales Amount",
 MAX(SalesAmount) AS "Highest Sales Amount"
 FROM sales1
 GROUP BY SalesPerson;
 
 -- Find the total monetary sales amount achieved by each store
-SELECT Store, SUM(SalesAmount) AS "Total Sales"
+SELECT Store, ROUND(SUM(SalesAmount), 2) AS "Total Sales"
 FROM sales1
 GROUP BY Store;
 
@@ -83,7 +83,7 @@ GROUP BY SalesPerson
 HAVING COUNT(SalesPerson) < 3;
 
 -- Find the total amount of sales by month where combined total is less than £100
-SELECT Month, SUM(SalesAmount) AS "Total Sales"
+SELECT Month, ROUND(SUM(SalesAmount), 2) AS "Total Sales"
 FROM sales1
 GROUP BY Month
 HAVING SUM(SalesAmount) < 100;
